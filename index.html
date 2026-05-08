@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Tracking Studio</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="stage">
+        <header class="topbar" aria-label="Application controls">
+          <div>
+            <p class="eyebrow">Browser camera</p>
+            <h1>Face & Hand Tracking Studio</h1>
+          </div>
+          <div class="toolbar">
+            <button class="icon-button" id="startButton" type="button" aria-label="Start tracking" title="Start tracking">
+              <i data-lucide="play"></i>
+              <span>Start</span>
+            </button>
+            <button class="icon-button ghost" id="stopButton" type="button" aria-label="Stop camera" title="Stop camera" disabled>
+              <i data-lucide="square"></i>
+              <span>Stop</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="viewer" id="viewer">
+          <video id="video" playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="empty-state" id="emptyState">
+            <div class="scan-ring" aria-hidden="true"></div>
+            <p>Camera idle</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="Tracking information">
+        <section class="metric-grid" aria-live="polite">
+          <div class="metric">
+            <span>Faces</span>
+            <strong id="faceCount">0</strong>
+          </div>
+          <div class="metric">
+            <span>FPS</span>
+            <strong id="fps">0</strong>
+          </div>
+          <div class="metric">
+            <span>Status</span>
+            <strong id="statusText">Ready</strong>
+          </div>
+          <div class="metric">
+            <span>Hands</span>
+            <strong id="handCount">0</strong>
+          </div>
+        </section>
+
+        <section class="controls">
+          <label class="switch-row">
+            <span>Bounding boxes</span>
+            <input id="boxToggle" type="checkbox" checked />
+          </label>
+          <label class="switch-row">
+            <span>Landmark mesh</span>
+            <input id="meshToggle" type="checkbox" checked />
+          </label>
+          <label class="switch-row">
+            <span>Face contours</span>
+            <input id="contourToggle" type="checkbox" checked />
+          </label>
+          <label class="switch-row">
+            <span>Hand tracking</span>
+            <input id="handToggle" type="checkbox" checked />
+          </label>
+        </section>
+
+        <section class="readout">
+          <h2>Face signal</h2>
+          <dl>
+            <div>
+              <dt>Position</dt>
+              <dd id="positionText">-</dd>
+            </div>
+            <div>
+              <dt>Scale</dt>
+              <dd id="scaleText">-</dd>
+            </div>
+            <div>
+              <dt>Head angle</dt>
+              <dd id="angleText">-</dd>
+            </div>
+            <div>
+              <dt>Emotion</dt>
+              <dd id="emotionText">-</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="readout">
+          <h2>Hand signal</h2>
+          <dl>
+            <div>
+              <dt>Gesture</dt>
+              <dd id="gestureText">-</dd>
+            </div>
+            <div>
+              <dt>Hand side</dt>
+              <dd id="handSideText">-</dd>
+            </div>
+          </dl>
+        </section>
+
+        <p class="privacy-note">Video stays on this device. Face, emotion, and hand gesture tracking run locally in your browser after the models load.</p>
+      </aside>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
